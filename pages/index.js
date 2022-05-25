@@ -2,37 +2,9 @@ import Head from 'next/head'
 
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
-import {
-  AnnotationIcon,
-  ChatAlt2Icon,
-  InboxIcon,
-  MenuIcon,
-  QuestionMarkCircleIcon,
-  XIcon,
-} from '@heroicons/react/outline'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-
-const solutions = [
-  {
-    name: 'Inbox',
-    description: 'Get a better understanding of where your traffic is coming from.',
-    href: '#',
-    icon: InboxIcon,
-  },
-  {
-    name: 'Messaging',
-    description: 'Speak directly to your customers in a more meaningful way.',
-    href: '#',
-    icon: AnnotationIcon,
-  },
-  { name: 'Live Chat', description: "Your customers' data will be safe and secure.", href: '#', icon: ChatAlt2Icon },
-  {
-    name: 'Knowledge Base',
-    description: "Connect with third-party tools that you're already using.",
-    href: '#',
-    icon: QuestionMarkCircleIcon,
-  },
-]
+import POSTItemsList from '../components/pos/POSTItemsList'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -99,21 +71,7 @@ export default function Home() {
                         <Popover.Panel className="absolute z-10 -ml-4 mt-3 transform w-screen max-w-md lg:max-w-2xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
                           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                             <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
-                              {solutions.map((item) => (
-                                <a
-                                  key={item.name}
-                                  href={item.href}
-                                  className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                                >
-                                  <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white sm:h-12 sm:w-12">
-                                    <item.icon className="h-6 w-6" aria-hidden="true" />
-                                  </div>
-                                  <div className="ml-4">
-                                    <p className="text-base font-medium text-gray-900">{item.name}</p>
-                                    <p className="mt-1 text-sm text-gray-500">{item.description}</p>
-                                  </div>
-                                </a>
-                              ))}
+
                             </div>
                           </div>
                         </Popover.Panel>
@@ -145,6 +103,7 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Mobile Version - Navigation */}
             <Transition
               as={Fragment}
               enter="duration-200 ease-out"
@@ -177,33 +136,11 @@ export default function Home() {
                     </div>
                     <div className="mt-6">
                       <nav className="grid grid-cols-1 gap-7">
-                        {solutions.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            className="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
-                          >
-                            <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-                              <item.icon className="h-6 w-6" aria-hidden="true" />
-                            </div>
-                            <div className="ml-4 text-base font-medium text-gray-900">{item.name}</div>
-                          </a>
-                        ))}
+
                       </nav>
                     </div>
                   </div>
                   <div className="py-6 px-5">
-                    <div className="grid grid-cols-2 gap-4">
-                      <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                        Pricing
-                      </a>
-                      <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                        Partners
-                      </a>
-                      <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                        Company
-                      </a>
-                    </div>
                     <div className="mt-6">
                       <a
                         href="#"
@@ -226,11 +163,11 @@ export default function Home() {
         </header>
 
         <main>
-          
+          <POSTItemsList />
         </main>
 
         <footer className="bg-gray-50" aria-labelledby="footer-heading">
-          
+
         </footer>
       </div>
     </div>
