@@ -132,7 +132,7 @@ const POSTItemsList = () => {
                   <thead className="bg-gray-50">
                     <tr>
                       <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                        Id
+                        ID
                       </th>
                       <th
                         scope="col"
@@ -153,29 +153,38 @@ const POSTItemsList = () => {
                         Total
                       </th>
                       <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                        <span className="sr-only">Action</span>
+                        <span className="sr-only">Edit</span>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {cart && (
-                      cart.map((item) => (
-                        <tr key={item.id}>
-                          <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-                            {item.id}
-                          </td>
-                          <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{item.title}</td>
-                          <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{item.price}</td>
-                          <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{item.qty}</td>
-                          <td className="px-3 py-4 text-sm text-gray-500">{item.totalAmount}</td>
-                          <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <button className="text-indigo-600 hover:text-indigo-900" onClick={() => removeToCart(item)}>
-                              <XCircleIcon className="h-6 w-6" aria-hidden="true" /><span className="sr-only">, {item.title}</span>
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                    )}
+                    {cart.map((item) => (
+                      <tr key={item.id}>
+                        <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                          {item.title}
+                          <dl className="font-normal lg:hidden">
+                            <dt className="sr-only">Quantity</dt>
+                            <dd className="mt-1 truncate text-gray-700">{item.qty}</dd>
+                            <dt className="sr-only sm:hidden">Price</dt>
+                            <dd className="mt-1 truncate text-gray-500 sm:hidden">{item.price}</dd>
+                            <dd className="mt-1 truncate text-gray-500 sm:hidden">
+                              <button className="text-indigo-600 hover:text-indigo-900" onClick={() => removeToCart(item)}>
+                                <XCircleIcon className="h-6 w-6" aria-hidden="true" /><span className="sr-only">, {item.title}</span>
+                              </button>
+                            </dd>
+                          </dl>
+                        </td>
+                        <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{item.title}</td>
+                        <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{item.qty}</td>
+                        <td className="px-3 py-4 text-sm text-gray-500">{item.price}</td>
+                        <td className="px-3 py-4 text-sm text-gray-500">{item.totalAmount}</td>
+                        <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                          <button className="text-indigo-600 hover:text-indigo-900" onClick={() => removeToCart(item)}>
+                            <XCircleIcon className="h-6 w-6" aria-hidden="true" /><span className="sr-only">, {item.title}</span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

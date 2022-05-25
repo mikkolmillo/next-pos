@@ -40,7 +40,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                 <td className="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
                   <div className="font-medium text-gray-900">{item.title}</div>
                   <div className="mt-0.5 text-gray-500 sm:hidden">
-                    {item.qty}pcs at {item.price}
+                    {item.qty} pcs at {item.price}
                   </div>
                 </td>
                 <td className="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell">{item.title}</td>
