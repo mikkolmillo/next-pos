@@ -23,7 +23,7 @@ const POSTItemsList = () => {
 
 
   const fetchProducts = async () => {
-    const res = await axios.get('http://localhost:5000/products')
+    const res = await axios.get('/api/products')
     const data = await res.data
 
     console.log(data);
