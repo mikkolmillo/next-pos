@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { ShoppingCartIcon } from '@heroicons/react/outline'
 import POSTItemsList from '../components/pos/POSTItemsList'
 
 function classNames(...classes) {
@@ -17,6 +18,94 @@ export default function Home() {
       <div>
         <main>
           <POSTItemsList />
+
+          <div className="max-w-7xl mx-auto mb-9">
+            <div className="border-4">
+              <div className="mx-auto h-[1200px] max-w-5xl border-2 border-red-800">
+                {/* Screen */}
+                <div className="h-[600px] w-full border-8 border-green-500"></div>
+                {/* Buttons */}
+                <div className="flex flex-col border-4 border-orange-600">
+                  <div>
+                    <button className='p-4 border-5 border-orange-400 w-1/2 focus:ring-2 focus:ring-sky-500 bg-gray-200'>
+                      Laybys
+                    </button>
+                    <button className='p-4 border-5 border-orange-400 w-1/2 focus:ring-2 focus:ring-sky-500 bg-violet-500'>
+                      Deliveries
+                    </button>
+                  </div>
+                  <div>
+                    <button className='p-4 border-5 border-orange-400 w-1/2 focus:ring-2 focus:ring-sky-500 bg-gray-200'>
+                      Quotes
+                    </button>
+                    <button className='p-4 border-5 border-orange-400 w-1/2 focus:ring-2 focus:ring-sky-500 bg-violet-500'>
+                      Generic
+                    </button>
+                  </div>
+                  <div>
+                    <button className='p-4 border-5 border-orange-400 w-1/2 focus:ring-2 focus:ring-sky-500 bg-gray-200'>
+                      Show Orders
+                    </button>
+                    <button className='p-4 border-5 border-orange-400 w-1/2 focus:ring-2 focus:ring-sky-500 bg-violet-500'>
+                      Products
+                    </button>
+                  </div>
+                  <div className="flex">
+                    <div className="w-1/2">
+                      <div className="w-full">
+                        <button className='text-xl border-4 w-full'>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          Customer
+                        </button>
+                      </div>
+
+                      <div className="h-full flex justify-center items-center">
+                        <div className="flex-col">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+                          </svg>
+                          <h2>Payment</h2>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='flex-col text-2xl w-1/2 border-2'>
+                      <div>
+                        <button className='p-4 border-2'>1</button>
+                        <button className='p-4 border-2'>2</button>
+                        <button className='p-4 border-2'>3</button>
+                        <button className='p-4 border-2 bg-green-600'>Qty</button>
+                      </div>
+                      <div>
+                        <button className='p-4 border-2'>4</button>
+                        <button className='p-4 border-2'>5</button>
+                        <button className='p-4 border-2'>6</button>
+                        <button className='p-4 border-2'>Disc</button>
+                      </div>
+                      <div className="">
+                        <button className='p-4 border-2'>7</button>
+                        <button className='p-4 border-2'>8</button>
+                        <button className='p-4 border-2'>9</button>
+                        <button className='p-4 border-2'>Price</button>
+                      </div>
+                      <div className="">
+                        <button className='p-4 border-2'>+/-</button>
+                        <button className='p-4 border-2'>0</button>
+                        <button className='p-4 border-2'>.</button>
+                        <button className='p-4 border-2'>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </main>
 
         <footer className="bg-gray-50" aria-labelledby="footer-heading">
