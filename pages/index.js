@@ -19,12 +19,12 @@ export default function Home() {
         <main>
           <POSTItemsList />
 
-          <div className="max-w-7xl mx-auto mb-9">
+          {/* <div className="max-w-7xl mx-auto mb-9">
             <div className="border-4">
               <div className="mx-auto h-[1200px] max-w-5xl border-2 border-red-800">
-                {/* Screen */}
+
                 <div className="h-[600px] w-full border-8 border-green-500"></div>
-                {/* Buttons */}
+                
                 <div className="flex flex-col border-4 border-orange-600">
                   <div>
                     <button className='p-4 border-5 border-orange-400 w-1/2 focus:ring-2 focus:ring-sky-500 bg-gray-200'>
@@ -105,7 +105,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </main>
 
         <footer className="bg-gray-50" aria-labelledby="footer-heading">
