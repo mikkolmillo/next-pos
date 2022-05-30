@@ -1,39 +1,39 @@
 const products = [
   {
     "id": 1,
-    "title": "orange",
+    "title": "Caroma Geo soft close toilet seat replacement replaces 300034W",
     "price": 2,
-    "source": "https://cdn.pixabay.com/photo/2012/04/26/12/51/orange-42394__340.png"
+    "source": "https://hotandcoldoutlet.com.au/wp-content/uploads/2019/01/geo-in-stock.jpg"
   },
   {
     "id": 2,
-    "title": "banana",
+    "title": "Cover plate 74mm Matte Black",
     "price": 4,
-    "source": "https://cdn.pixabay.com/photo/2015/01/27/18/32/bananas-614090__340.jpg"
+    "source": "https://hotandcoldoutlet.com.au/wp-content/uploads/2021/11/74mm-black-flange-600x348.jpg"
   },
   {
     "id": 3,
-    "title": "apple",
+    "title": "Contemporary Round Chopping Board",
     "price": 6,
-    "source": "https://cdn.pixabay.com/photo/2017/09/26/13/31/apple-2788616_960_720.jpg"
+    "source": "https://hotandcoldoutlet.com.au/wp-content/uploads/2018/08/42537_Capture.jpg"
   },
   {
     "id": 4,
-    "title": "mango",
+    "title": "Board & Colander Set",
     "price": 8,
-    "source": "https://cdn.pixabay.com/photo/2016/02/23/17/28/mango-1218129__340.png"
+    "source": "https://hotandcoldoutlet.com.au/wp-content/uploads/2019/01/15010_MHBC_BK_Image_HeroImage_Clark_Half_Board_and_Colander_Set-600x600.jpg"
   },
   {
     "id": 5,
-    "title": "strawberry",
+    "title": "Advance Timber Chopping Board",
     "price": 10,
-    "source": "https://cdn.pixabay.com/photo/2013/04/02/21/47/strawberries-99551__340.jpg"
+    "source": "https://hotandcoldoutlet.com.au/wp-content/uploads/2018/05/14601_A2511_BK_Image_HeroImage_Clark_Advance_Timber_Chopping_Board_800px_800px-600x600.jpg"
   },
   {
     "id": 6,
-    "title": "grapes",
+    "title": "Prism Stainless Steel Drainer Tray",
     "price": 15,
-    "source": "https://cdn.pixabay.com/photo/2016/03/27/17/14/grapes-1283162__340.jpg"
+    "source": "https://hotandcoldoutlet.com.au/wp-content/uploads/2018/05/28318_pA5016_BK_Image_HeroImage_150108_ori_1772px_1772px_2015Mar27163649_800px_800px-600x600.jpg"
   }
 ]
 
