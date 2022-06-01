@@ -1,12 +1,7 @@
 import Head from 'next/head'
-import { ShoppingCartIcon } from '@heroicons/react/outline'
 import POSTItemsList from '../components/pos/POSTItemsList'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function Home() {
+export default function Home({ allProducts }) {
   return (
     <div className="bg-white">
       <Head>
@@ -17,7 +12,7 @@ export default function Home() {
 
       <div>
         <main>
-          <POSTItemsList />
+          <POSTItemsList allProducts={allProducts} />
 
           {/* <div className="max-w-7xl mx-auto mb-9">
             <div className="border-4">
@@ -114,4 +109,15 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export const getServerSideProps = async () => {
+  const res = await fetch('http://localhost:3000/api/products')
+  const allProducts = await res.json()
+
+  return {
+    props: {
+      allProducts, // <== here is a solution
+    },
+  };
 }

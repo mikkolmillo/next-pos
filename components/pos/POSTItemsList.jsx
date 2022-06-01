@@ -5,14 +5,9 @@ import { ArrowCircleRightIcon } from '@heroicons/react/solid'
 import { ComponentToPrint } from '../utils/ComponentToPrint'
 import { useReactToPrint } from 'react-to-print'
 
-const POSTItemsList = () => {
-  const [products, setProducts] = useState([])
+const POSTItemsList = ({ allProducts }) => {
   const [cart, setCart] = useState([])
   const [totalAmount, setTotalAmount] = useState(0)
-
-  useEffect(() => {
-    fetchProducts()
-  }, [])
 
   useEffect(() => {
     let newTotalAmount = 0
@@ -21,15 +16,6 @@ const POSTItemsList = () => {
 
     setTotalAmount(newTotalAmount)
   }, [cart])
-
-
-  const fetchProducts = async () => {
-    const res = await axios.get('/api/products')
-    const data = await res.data
-
-    console.log(data);
-    setProducts(data)
-  }
 
   const addProductToCart = async (product) => {
     // ? Check if product exist in cart
@@ -146,7 +132,7 @@ const POSTItemsList = () => {
                       {cart.map((item) => (
                         <tr key={item.id}>
                           <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-                            {item.title}
+                            {item.id}
                             <dl className="font-normal lg:hidden">
                               <dt className="sr-only">Quantity</dt>
                               <dd className="mt-1 truncate text-gray-700">{item.qty}</dd>
@@ -154,12 +140,12 @@ const POSTItemsList = () => {
                               <dd className="mt-1 truncate text-gray-500 sm:hidden">{item.price}</dd>
                               <dd className="mt-1 truncate text-gray-500 sm:hidden">
                                 <button className="text-indigo-600 hover:text-indigo-900" onClick={() => removeToCart(item)}>
-                                  <XCircleIcon className="h-6 w-6" aria-hidden="true" /><span className="sr-only">, {item.title}</span>
+                                  <XCircleIcon className="h-6 w-6" aria-hidden="true" /><span className="sr-only">, {item.name}</span>
                                 </button>
                               </dd>
                             </dl>
                           </td>
-                          <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{item.title}</td>
+                          <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{item.name}</td>
                           <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{item.qty}</td>
                           <td className="px-3 py-4 text-sm text-gray-500">{item.price}</td>
                           <td className="px-3 py-4 text-sm text-gray-500">{item.totalAmount}</td>
@@ -272,7 +258,7 @@ const POSTItemsList = () => {
             </div>
             {/* <div className='max-w-7xl w-auto'>
               <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-                {products.map((p) => (
+                {allProducts.map((p) => (
                   <li key={p.id} className="relative" onClick={() => addProductToCart(p)}>
                     <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
                       <img src={p.source} alt="" className="object-cover pointer-events-none group-hover:opacity-75" />
@@ -290,15 +276,15 @@ const POSTItemsList = () => {
           <div className="mt-12 sm:mt-16 lg:mt-0">
             <div className='max-w-7xl w-auto'>
               <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-                {products.map((p) => (
+                {allProducts.map((p) => (
                   <li key={p.id} className="relative" onClick={() => addProductToCart(p)}>
                     <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-                      <img src={p.source} alt="" className="object-cover pointer-events-none group-hover:opacity-75" />
+                      <img src={p.images} alt="" className="object-cover pointer-events-none group-hover:opacity-75" />
                       <button type="button" className="absolute inset-0 focus:outline-none">
-                        <span className="sr-only">View details for {p.title}</span>
+                        <span className="sr-only">View details for {p.name}</span>
                       </button>
                     </div>
-                    <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{p.title}</p>
+                    <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{p.code}</p>
                     <p className="block text-sm font-medium text-gray-500 pointer-events-none">{p.price}</p>
                   </li>
                 ))}
