@@ -1,4 +1,4 @@
-import axios from 'axios'
+import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
 import { XCircleIcon, UserCircleIcon, BackspaceIcon } from '@heroicons/react/outline'
 import { ArrowCircleRightIcon } from '@heroicons/react/solid'
@@ -218,9 +218,13 @@ const POSTItemsList = ({ allProducts }) => {
                     </button>
                   </div>
 
-                  <button className='w-full flex-col items-center pt-10'>
-                    <ArrowCircleRightIcon className='h-20 w-20' />
-                    <h2 className='inline-block text-2xl font-semibold'>Payment</h2>
+                  <button className='w-full flex-col justify-center items-center pt-10'>
+                    <Link className='inline-block text-2xl font-semibold' href={'/checkout'}>
+                      <a>
+                        <ArrowCircleRightIcon className='h-20 w-20' />
+                        Payment
+                      </a>
+                    </Link>
                   </button>
                 </div>
 
