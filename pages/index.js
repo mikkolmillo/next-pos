@@ -112,7 +112,7 @@ export default function Home({ allProducts }) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/products')
+  const res = await fetch(`${process.env.DEV_URL}/api/products`)
   const allProducts = await res.json()
 
   return {
