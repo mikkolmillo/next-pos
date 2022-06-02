@@ -115,6 +115,7 @@ export const getServerSideProps = async () => {
   const res = await fetch(`${process.env.BASE_URL}/api/products`)
   const allProducts = await res.json()
 
+  console.log(`${process.env.BASE_URL}`);
   return {
     props: {
       allProducts, // <== here is a solution

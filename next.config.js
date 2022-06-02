@@ -2,7 +2,7 @@
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 
 const nextConfig = (phase) => {
-  if (PHASE_DEVELOPMENT_SERVER) {
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
       reactStrictMode: true,
       env: {
