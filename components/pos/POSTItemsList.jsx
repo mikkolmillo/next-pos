@@ -1,14 +1,25 @@
 import Link from 'next/link'
-import { useEffect, useState, useRef } from 'react'
-import { XCircleIcon, UserCircleIcon, BackspaceIcon } from '@heroicons/react/outline'
+import { useEffect, useState, useRef, useContext } from 'react'
+import {
+  XCircleIcon,
+  UserCircleIcon,
+  BackspaceIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
+} from '@heroicons/react/outline'
 import { ArrowCircleRightIcon } from '@heroicons/react/solid'
 import { ComponentToPrint } from '../utils/ComponentToPrint'
 import { useReactToPrint } from 'react-to-print'
 import ItemList from '../HomeItems/ItemList'
+import CartContext from '../../store/context/cart-context'
 
 const POSTItemsList = ({ allProducts }) => {
-  const [cart, setCart] = useState([])
+  const cartCtx = useContext(CartContext)
   const [totalAmount, setTotalAmount] = useState(0)
+
+  const numOfCartItems = cartCtx.items.reduce((currNum, item) => {
+    return currNum + item.amount
+  }, 0)
 
   // ? ~~~~~~~~~~~~ React to Print Functions
   const componentRef = useRef()
@@ -18,6 +29,16 @@ const POSTItemsList = ({ allProducts }) => {
 
   const handlePrint = () => {
     handleReactToPrint()
+  }
+  // ? ~~~~~~~~~~~~ END
+
+  // ? ~~~~~~~~~~~~ Add and Reduce Quantity
+  const cartItemAddHandler = item => {
+    cartCtx.addItem({...item, amount: 1})
+  }
+
+  const cartItemRemoveHandler = id => {
+    cartCtx.removeItem(id)
   }
   // ? ~~~~~~~~~~~~ END
 
@@ -32,15 +53,16 @@ const POSTItemsList = ({ allProducts }) => {
               {/* Screen */}
               <div>
                 <div className="hidden">
-                  <ComponentToPrint
+                  {/* <ComponentToPrint
                     cart={cart}
                     totalAmount={totalAmount}
                     ref={componentRef}
-                  />
+                  /> */}
                 </div>
                 <div className="sm:flex sm:items-center">
                   <div className="sm:flex-auto">
                     <h1 className="text-xl font-semibold text-gray-900">Invoice</h1>
+                    <span className='text-xl font-bold text-gray-900'># of Items: {numOfCartItems}</span>
                   </div>
                   <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                     {totalAmount > 0 && (
@@ -85,7 +107,7 @@ const POSTItemsList = ({ allProducts }) => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {cart.map((item) => (
+                      {cartCtx.items.map((item) => (
                         <tr key={item.id}>
                           <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
                             {item.id}
@@ -103,31 +125,26 @@ const POSTItemsList = ({ allProducts }) => {
                           </td>
                           <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{item.name}</td>
                           <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{item.price}</td>
-                          {/* <td className="px-3 py-4 text-sm text-gray-500">{item.qty}</td> */}
-                          {/* <td className="px-3 py-4 text-sm text-gray-500">{item.totalAmount}</td> */}
-                          <td className="px-3 py-4 text-sm text-gray-500">
-                            <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                              <div>
-                                <div className="mt-1 relative rounded-md shadow-sm">
-                                  <input
-                                    type="number"
-                                    name={`amount_${item.id}`}
-                                    id="amount"
-                                    className="block w-full sm:text-sm rounded-md"
-                                    defaultValue="1"
-                                    min={'1'}
-                                    max={'5'}
-                                    aria-invalid="true"
-                                    aria-describedby="amount-error"
-                                  />
-                                </div>
-                              </div>
-                            </nav>
-                          </td>
+                          <td className="px-3 py-4 text-sm text-gray-500">{item.amount}</td>
                           <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <button className="text-indigo-600 hover:text-indigo-900" onClick={() => removeToCart(item)}>
-                              <XCircleIcon className="h-6 w-6" aria-hidden="true" /><span className="sr-only">, {item.title}</span>
-                            </button>
+                            <span className="relative z-0 inline-flex shadow-sm rounded-md">
+                              <button
+                                type="button"
+                                className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                                onClick={cartItemRemoveHandler.bind(null, item.id)}
+                              >
+                                <span className="sr-only">Remove</span>
+                                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                              </button>
+                              <button
+                                type="button"
+                                className="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                                onClick={cartItemAddHandler.bind(null, item)}
+                              >
+                                <span className="sr-only">Add</span>
+                                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                              </button>
+                            </span>
                           </td>
                         </tr>
                       ))}
@@ -238,7 +255,7 @@ const POSTItemsList = ({ allProducts }) => {
           </div>
           {/* Item List */}
           {allProducts && (
-            <ItemList products={allProducts}/>
+            <ItemList products={allProducts} />
           )}
         </div>
       </div>

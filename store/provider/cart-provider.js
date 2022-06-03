@@ -1,4 +1,4 @@
-import { useReducer } from "react/cjs/react.production.min"
+import { useReducer } from "react"
 import CartContext from "../context/cart-context"
 import cartReducer, { defaultCartState } from "../reducer/cart-reducer"
 
@@ -14,15 +14,15 @@ const CartProvider = (props) => {
   }
 
   const cartContext = {
-    items: [],
-    totalAmount: 0,
+    items: cartState.items,
+    totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemToCartProvider
   }
 
   return (
     <CartContext.Provider value={cartContext}>
-      {props}
+      {props.children}
     </CartContext.Provider>
   )
 }
