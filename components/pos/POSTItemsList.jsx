@@ -4,6 +4,7 @@ import { XCircleIcon, UserCircleIcon, BackspaceIcon } from '@heroicons/react/out
 import { ArrowCircleRightIcon } from '@heroicons/react/solid'
 import { ComponentToPrint } from '../utils/ComponentToPrint'
 import { useReactToPrint } from 'react-to-print'
+import ItemList from '../HomeItems/ItemList'
 
 const POSTItemsList = ({ allProducts }) => {
   const [cart, setCart] = useState([])
@@ -236,24 +237,9 @@ const POSTItemsList = ({ allProducts }) => {
             </div>
           </div>
           {/* Item List */}
-          <div className="mt-12 sm:mt-16 lg:mt-0">
-            <div className='max-w-7xl w-auto'>
-              <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-                {allProducts.map((p) => (
-                  <li key={p.id} className="relative" onClick={() => addProductToCart(p)}>
-                    <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-                      <img src={p.images} alt="" className="object-cover pointer-events-none group-hover:opacity-75" />
-                      <button type="button" className="absolute inset-0 focus:outline-none">
-                        <span className="sr-only">View details for {p.name}</span>
-                      </button>
-                    </div>
-                    <p className="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">{p.code}</p>
-                    <p className="block text-sm font-medium text-gray-500 pointer-events-none">{p.price}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          {allProducts && (
+            <ItemList products={allProducts}/>
+          )}
         </div>
       </div>
     </div>
