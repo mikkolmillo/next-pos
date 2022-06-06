@@ -1,14 +1,18 @@
 import { prisma } from "../../lib/db"
 
 export default async function userHandler(req, res) {
-  const { method } = req
+  const { method, body } = req
 
   switch (method) {
     case "GET":
       const products = await getProducts()
 
       return res.status(200).json(products)
-      break;
+
+    case "POST":
+      const newProduct = await addProduct(body.product)
+
+      return res.status(201).json(newProduct)
 
     default:
       res.setHeader('Allow', ['GET'])
@@ -22,8 +26,20 @@ const getProducts = async () => {
 
     return allProducts
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
   await prisma.$disconnect()
+}
+
+const addProduct = async (newProduct) => {
+  try {
+    const product = await prisma.product_t.create({
+      data: newProduct
+    })
+
+    return product
+  } catch (error) {
+    console.error(error);
+  }
 }

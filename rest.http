@@ -1,0 +1,22 @@
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  
+}
+
+# Products
+###
+GET http://localhost:3000/api/products
+
+###
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "product": {
+    "name": "test",
+    "price": "20.17",
+    "quantity": "200"
+  }
+}
