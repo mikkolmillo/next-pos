@@ -14,7 +14,7 @@ const ItemList = ({ products }) => {
   
   return (
     <div className="mt-12 sm:mt-16 lg:mt-0">
-      <div className='max-w-7xl w-auto'>
+      <div className='max-w-full w-auto'>
         <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           {productList}
         </ul>

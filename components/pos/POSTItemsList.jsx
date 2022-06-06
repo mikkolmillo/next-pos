@@ -53,11 +53,11 @@ const POSTItemsList = ({ allProducts }) => {
               {/* Screen */}
               <div>
                 <div className="hidden">
-                  {/* <ComponentToPrint
-                    cart={cart}
-                    totalAmount={totalAmount}
+                  <ComponentToPrint
+                    cart={cartCtx.items}
+                    totalAmount={cartCtx.totalAmount}
                     ref={componentRef}
-                  /> */}
+                  />
                 </div>
                 <div className="sm:flex sm:items-center">
                   <div className="sm:flex-auto">
@@ -65,7 +65,7 @@ const POSTItemsList = ({ allProducts }) => {
                     <span className='text-xl font-bold text-gray-900'># of Items: {numOfCartItems}</span>
                   </div>
                   <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                    {totalAmount > 0 && (
+                    {cartCtx.totalAmount > 0 && (
                       <button
                         type="button"
                         onClick={handlePrint}
@@ -80,9 +80,6 @@ const POSTItemsList = ({ allProducts }) => {
                   <table className="min-w-full divide-y divide-gray-300">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                          ID
-                        </th>
                         <th
                           scope="col"
                           className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
@@ -110,21 +107,15 @@ const POSTItemsList = ({ allProducts }) => {
                       {cartCtx.items.map((item) => (
                         <tr key={item.id}>
                           <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-                            {item.id}
+                            {item.name}
                             <dl className="font-normal lg:hidden">
                               <dt className="sr-only">Quantity</dt>
-                              <dd className="mt-1 truncate text-gray-700">{item.qty}</dd>
+                              <dd className="mt-1 truncate text-gray-700">{item.amount} pcs</dd>
                               <dt className="sr-only sm:hidden">Price</dt>
-                              <dd className="mt-1 truncate text-gray-500 sm:hidden">{item.price}</dd>
-                              <dd className="mt-1 truncate text-gray-500 sm:hidden">
-                                <button className="text-indigo-600 hover:text-indigo-900" onClick={() => removeToCart(item)}>
-                                  <XCircleIcon className="h-6 w-6" aria-hidden="true" /><span className="sr-only">, {item.name}</span>
-                                </button>
-                              </dd>
+                              <dd className="mt-1 truncate text-gray-500 sm:hidden">${item.price}</dd>
                             </dl>
                           </td>
-                          <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{item.name}</td>
-                          <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{item.price}</td>
+                          <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">${item.price.toLocaleString('en-AU')}</td>
                           <td className="px-3 py-4 text-sm text-gray-500">{item.amount}</td>
                           <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                             <span className="relative z-0 inline-flex shadow-sm rounded-md">
