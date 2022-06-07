@@ -13,10 +13,11 @@ export default async function userHandler(req, res) {
       } else {
         return res.status(500).json({ status: "fail", message: "Server Error" })
       }
+
     case 'GET':
       const allOrders = await getOrders()
 
-      break;
+      return res.status(200).json(allOrders)
 
     default:
       res.setHeader('Allow', ['POST'], ['GET'])
@@ -26,7 +27,9 @@ export default async function userHandler(req, res) {
 
 const getOrders = async () => {
   try {
+    const allOrders = await prisma.orders.findMany({})
 
+    return allOrders
   } catch (error) {
     console.error(error);
   }
