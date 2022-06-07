@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { PaperClipIcon } from '@heroicons/react/solid'
 
 const projects = [
@@ -7,9 +6,14 @@ const projects = [
 ]
 
 const OrderPage = ({ order }) => {
-  const router = useRouter()
+  const products = order.products.map((product) => product.product_t)
 
-  router.query
+  const formattedOrder = {
+    id: order.id,
+    totalAmount: order.totalAmount,
+    products
+  }
+
   return (
     <div className="bg-gray-300 h-screen overflow-hidden shadow rounded-lg">
       <div className="px-4 py-5 sm:p-6 lg:m-14 m-0">
@@ -52,40 +56,40 @@ const OrderPage = ({ order }) => {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"
                       >
-                        Project
+                        {/* Name */}
                       </th>
                       <th
                         scope="col"
                         className="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell"
                       >
-                        Hours
+                        {/* Quantity */}
                       </th>
                       <th
                         scope="col"
                         className="hidden py-3.5 px-3 text-right text-sm font-semibold text-gray-900 sm:table-cell"
                       >
-                        Rate
+                        {/* Price */}
                       </th>
                       <th
                         scope="col"
                         className="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0"
                       >
-                        Price
+                        {/* Total Price */}
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {projects.map((project) => (
-                      <tr key={project.id} className="border-b border-gray-200">
+                    {formattedOrder.products.map((product) => (
+                      <tr key={product.id} className="border-b border-gray-200">
                         <td className="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                          <div className="font-medium text-gray-900">{project.name}</div>
+                          <div className="font-medium text-gray-900">{product.name}</div>
                           <div className="mt-0.5 text-gray-500 sm:hidden">
-                            {project.hours} hours at {project.rate}
+                            {/* {product.hours} hours at {product.price} */}
                           </div>
                         </td>
-                        <td className="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell">{project.hours}</td>
-                        <td className="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell">{project.rate}</td>
-                        <td className="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">{project.price}</td>
+                        <td className="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"></td>
+                        <td className="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell"></td>
+                        <td className="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0"></td>
                       </tr>
                     ))}
                   </tbody>
@@ -101,9 +105,9 @@ const OrderPage = ({ order }) => {
                       <th scope="row" className="pl-4 pr-3 pt-6 text-left text-sm font-normal text-gray-500 sm:hidden">
                         Subtotal
                       </th>
-                      <td className="pl-3 pr-4 pt-6 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">$3,900.00</td>
+                      <td className="pl-3 pr-4 pt-6 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">${formattedOrder.totalAmount.toLocaleString('en-AU')}</td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <th
                         scope="row"
                         colSpan={3}
@@ -115,7 +119,7 @@ const OrderPage = ({ order }) => {
                         Tax
                       </th>
                       <td className="pl-3 pr-4 pt-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">$585.00</td>
-                    </tr>
+                    </tr> */}
                     <tr>
                       <th
                         scope="row"
@@ -128,7 +132,7 @@ const OrderPage = ({ order }) => {
                         Total
                       </th>
                       <td className="pl-3 pr-4 pt-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0">
-                        $4,485.00
+                        ${formattedOrder.totalAmount.toLocaleString('en-AU')}
                       </td>
                     </tr>
                   </tfoot>
@@ -150,7 +154,6 @@ export const getServerSideProps = async (context) => {
     const res = await fetch(`${process.env.BASE_URL}/api/orders/${orderId}`)
     const loadedOrder = await res.json()
 
-    console.log(loadedOrder);
     return {
       props: {
         order: loadedOrder

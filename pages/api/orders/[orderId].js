@@ -5,9 +5,9 @@ export default async function userHandler(req, res) {
 
   switch (method) {
     case 'GET':
-      const allOrders = await getOrders(query.orderId)
+      const order = await getOrders(query.orderId)
 
-      return res.status(200).json(allOrders)
+      return res.status(200).json(order)
     default:
       res.setHeader('Allow', ['GET'])
       res.status(405).end(`Method ${method} Not Allowed`)
@@ -16,13 +16,20 @@ export default async function userHandler(req, res) {
 
 const getOrders = async (orderId) => {
   try {
-    const allOrders = await prisma.orders.findFirst({
+    const order = await prisma.orders.findFirst({
       where: {
         id: Number(orderId)
+      },
+      include: {
+        products: {
+          include: {
+            product_t: true
+          }
+        }
       }
     })
 
-    return allOrders
+    return order
   } catch (error) {
     console.error(error);
   }
