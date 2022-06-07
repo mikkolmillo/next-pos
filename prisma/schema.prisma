@@ -21,7 +21,7 @@ model product_t {
   description    String?           @db.VarChar(2000)
   price          String?           @db.VarChar(2000)
   code           String?           @db.VarChar(50)
-  quantity       String?           @db.VarChar(10)
+  quantity       Int?              @default(0)
   images         String?           @db.VarChar(100)
   model          String?           @db.VarChar(4000)
   format_type    String?           @db.VarChar(10)
@@ -35,6 +35,7 @@ model product_t {
 
 model products_orders {
   id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
   product_t   product_t @relation(fields: [product_tId], references: [id])
   product_tId Int
   orders      orders    @relation(fields: [ordersId], references: [id])
@@ -44,6 +45,7 @@ model products_orders {
 model orders {
   id          Int               @id @default(autoincrement())
   totalAmount String            @db.VarChar(100)
+  orderedAt   DateTime          @default(now())
   products    products_orders[]
 }
 

@@ -2,7 +2,15 @@ POST http://localhost:3000/api/orders
 Content-Type: application/json
 
 {
-  
+  "order": {
+    "totalAmount": "12121.99",
+    "product": [
+      {
+        id: 1,
+        amount
+      }
+    ]
+  }
 }
 
 # Products
@@ -15,8 +23,8 @@ Content-Type: application/json
 
 {
   "product": {
-    "name": "test",
-    "price": "20.17",
-    "quantity": "200"
+    "name": "asdasd",
+    "price": "481.15",
+    "quantity": "50"
   }
 }

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useEffect, useState, useRef, useContext } from 'react'
+import { useRef, useContext } from 'react'
 import {
   XCircleIcon,
   UserCircleIcon,
@@ -15,7 +15,6 @@ import CartContext from '../../store/context/cart-context'
 
 const POSTItemsList = ({ allProducts }) => {
   const cartCtx = useContext(CartContext)
-  const [totalAmount, setTotalAmount] = useState(0)
 
   const numOfCartItems = cartCtx.items.reduce((currNum, item) => {
     return currNum + item.amount
