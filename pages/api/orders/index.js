@@ -1,4 +1,4 @@
-import { prisma } from "../../lib/db"
+import { prisma } from "../../../lib/db"
 
 export default async function userHandler(req, res) {
   const { method, body } = req
