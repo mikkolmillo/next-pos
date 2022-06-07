@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model brands {
+  id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name    String?  @db.VarChar(1000)
+  brand   String?  @db.VarChar(500)
+  user_id String?  @db.VarChar(300)
+  date    DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+}
+
+model product_t {
+  id             Int               @id @default(autoincrement())
+  name           String?           @db.VarChar(400)
+  description    String?           @db.VarChar(2000)
+  price          String?           @db.VarChar(2000)
+  code           String?           @db.VarChar(50)
+  quantity       Int?              @default(0)
+  images         String?           @db.VarChar(100)
+  model          String?           @db.VarChar(4000)
+  format_type    String?           @db.VarChar(10)
+  placement_type String?           @db.VarChar(10)
+  main_category  String?           @db.VarChar(50)
+  sub_category   String?           @db.VarChar(50)
+  group_category String?           @db.VarChar(50)
+  class_category String?           @db.VarChar(50)
+  orders         products_orders[]
+}
+
+model products_orders {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  product_t   product_t @relation(fields: [product_tId], references: [id])
+  product_tId Int
+  orders      orders    @relation(fields: [ordersId], references: [id])
+  ordersId    Int
+}
+
+model orders {
+  id          Int               @id @default(autoincrement())
+  totalAmount String            @db.VarChar(100)
+  orderedAt   DateTime          @default(now())
+  products    products_orders[]
+}
+
+model save_work {
+  id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name    String?  @db.VarChar(300)
+  file    String?  @db.VarChar(65535)
+  user_id String?  @db.VarChar(300)
+  date    DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+}
+
+model users {
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email    String
+  password String
+  type     String
+}
