@@ -1,5 +1,5 @@
 ###
-GET http://localhost:3000/api/orders
+GET http://localhost:3000/api/orders/11
 
 ###
 POST http://localhost:3000/api/orders

@@ -1,4 +1,5 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import { useRouter } from "next/router";
 import {
   ChevronLeftIcon,
   ChevronRightIcon
@@ -7,6 +8,8 @@ import CartContext from '../../store/context/cart-context'
 
 const OrderSummary = () => {
   const cartCtx = useContext(CartContext)
+  const router = useRouter()
+  const [checkoutSubmit, setCheckoutSubmit] = useState(false)
 
   const cartItemAddHandler = item => {
     cartCtx.addItem({ ...item, amount: 1 })
@@ -17,23 +20,34 @@ const OrderSummary = () => {
   }
 
   const submitOrderHandler = async () => {
-    const newOrder = {
-      order: {
-        totalAmount: cartCtx.totalAmount,
-        items: [...cartCtx.items]
+    setCheckoutSubmit(true)
+    try {
+      const newOrder = {
+        order: {
+          totalAmount: cartCtx.totalAmount,
+          items: [...cartCtx.items]
+        }
       }
+
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newOrder)
+      })
+
+      const data = await res.json()
+      setCheckoutSubmit(false)
+      if (data) {
+        router.push({
+          pathname: '/orders/[orderId]',
+          query: { orderId: data.id }
+        })
+      }
+    } catch (error) {
+      console.error(error);
     }
-
-    const res = await fetch('/api/orders', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newOrder)
-    })
-
-    const data = await res.json()
-    console.log(data);
   }
 
   return (
@@ -107,10 +121,11 @@ const OrderSummary = () => {
         <div className="mt-6">
           <button
             type='button'
-            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+            disabled={checkoutSubmit}
+            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 disabled:bg-indigo-300 disabled:text-gray-800"
             onClick={submitOrderHandler}
           >
-            Checkout
+            {checkoutSubmit ? "Submitting" : "Checkout"}
           </button>
         </div>
         {/* <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
