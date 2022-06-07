@@ -1,9 +1,6 @@
-import { PaperClipIcon } from '@heroicons/react/solid'
-
-const projects = [
-  { id: 1, name: 'New Advertising Campaign', hours: '12.0', rate: '$75.00', price: '$900.00' },
-  // More projects...
-]
+import { useRef } from "react"
+import { useReactToPrint } from 'react-to-print'
+import { ComponentToPrint } from '../../components/utils/ComponentToPrint'
 
 const OrderPage = ({ order }) => {
   const products = order.products.map((product) => product.product_t)
@@ -14,13 +11,40 @@ const OrderPage = ({ order }) => {
     products
   }
 
+  // ? ~~~~~~~~~~~~ React to Print Functions
+  const componentRef = useRef()
+  const handleReactToPrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+  const handlePrint = () => {
+    handleReactToPrint()
+  }
+  // ? ~~~~~~~~~~~~ END
+
   return (
     <div className="bg-gray-300 h-screen overflow-hidden shadow rounded-lg">
+      <div className="hidden">
+        <ComponentToPrint
+          cart={formattedOrder.products}
+          totalAmount={formattedOrder.totalAmount}
+          ref={componentRef}
+        />
+      </div>
       <div className="px-4 py-5 sm:p-6 lg:m-14 m-0">
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6 text-center">
             <h3 className="text-lg leading-6 font-medium text-gray-900">Order Detail</h3>
-            <p className="mt-1 text-nd text-gray-500">Order # <span className='font-bold'>{order.id}</span></p>
+            <p className="mt-1 text-nd text-gray-500 mb-2">Order # <span className='font-bold'>{order.id}</span></p>
+            <div className="mt-4 sm:mt-0 sm:flex-none">
+              <button
+                type="button"
+                onClick={handlePrint}
+                className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+              >
+                Print
+              </button>
+            </div>
           </div>
           <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
             <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
@@ -82,7 +106,7 @@ const OrderPage = ({ order }) => {
                     {formattedOrder.products.map((product) => (
                       <tr key={product.id} className="border-b border-gray-200">
                         <td className="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                          <div className="font-medium text-gray-900">{product.name}</div>
+                          <div className="text-lg font-medium text-gray-900">{product.name}</div>
                           <div className="mt-0.5 text-gray-500 sm:hidden">
                             {/* {product.hours} hours at {product.price} */}
                           </div>

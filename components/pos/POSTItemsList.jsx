@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useRef, useContext } from 'react'
+import { useContext } from 'react'
 import {
   XCircleIcon,
   UserCircleIcon,
@@ -8,8 +8,6 @@ import {
   ChevronRightIcon
 } from '@heroicons/react/outline'
 import { ArrowCircleRightIcon } from '@heroicons/react/solid'
-import { ComponentToPrint } from '../utils/ComponentToPrint'
-import { useReactToPrint } from 'react-to-print'
 import ItemList from '../HomeItems/ItemList'
 import CartContext from '../../store/context/cart-context'
 
@@ -20,20 +18,9 @@ const POSTItemsList = ({ allProducts }) => {
     return currNum + item.amount
   }, 0)
 
-  // ? ~~~~~~~~~~~~ React to Print Functions
-  const componentRef = useRef()
-  const handleReactToPrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
-
-  const handlePrint = () => {
-    handleReactToPrint()
-  }
-  // ? ~~~~~~~~~~~~ END
-
   // ? ~~~~~~~~~~~~ Add and Reduce Quantity
   const cartItemAddHandler = item => {
-    cartCtx.addItem({...item, amount: 1})
+    cartCtx.addItem({ ...item, amount: 1 })
   }
 
   const cartItemRemoveHandler = id => {
@@ -51,28 +38,10 @@ const POSTItemsList = ({ allProducts }) => {
             <div>
               {/* Screen */}
               <div>
-                <div className="hidden">
-                  <ComponentToPrint
-                    cart={cartCtx.items}
-                    totalAmount={cartCtx.totalAmount}
-                    ref={componentRef}
-                  />
-                </div>
                 <div className="sm:flex sm:items-center">
                   <div className="sm:flex-auto">
                     <h1 className="text-xl font-semibold text-gray-900">Invoice</h1>
                     <span className='text-xl font-bold text-gray-900'># of Items: {numOfCartItems}</span>
-                  </div>
-                  <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                    {cartCtx.totalAmount > 0 && (
-                      <button
-                        type="button"
-                        onClick={handlePrint}
-                        className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-                      >
-                        Print
-                      </button>
-                    )}
                   </div>
                 </div>
                 <div className="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
