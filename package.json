@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "prismaDev": "dotenv -e .env.local prisma migrate dev ",
     "lint": "next lint"
   },
   "dependencies": {
