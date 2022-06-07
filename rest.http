@@ -25,6 +25,6 @@ Content-Type: application/json
   "product": {
     "name": "asdasd",
     "price": "481.15",
-    "quantity": "50"
+    "quantity": 50
   }
 }
