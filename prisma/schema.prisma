@@ -7,13 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model brands {
-//   id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-//   name    String?  @db.VarChar(1000)
-//   brand   String?  @db.VarChar(500)
-//   user_id String?  @db.VarChar(300)
-//   date    DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
-// }
+model brands {
+  id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name    String?  @db.VarChar(1000)
+  brand   String?  @db.VarChar(500)
+  user_id String?  @db.VarChar(300)
+  date    DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+}
 
 model product_t {
   id             Int               @id @default(autoincrement())
@@ -43,21 +43,21 @@ model products_orders {
 
 model orders {
   id          Int               @id @default(autoincrement())
-  totalAmount Int               @default(0)
+  totalAmount String            @db.VarChar(100)
   products    products_orders[]
 }
 
-// model save_work {
-//   id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-//   name    String?  @db.VarChar(300)
-//   file    String?  @db.VarChar(65535)
-//   user_id String?  @db.VarChar(300)
-//   date    DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
-// }
+model save_work {
+  id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name    String?  @db.VarChar(300)
+  file    String?  @db.VarChar(65535)
+  user_id String?  @db.VarChar(300)
+  date    DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+}
 
-// model users {
-//   id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-//   email    String
-//   password String
-//   type     String
-// }
+model users {
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email    String
+  password String
+  type     String
+}

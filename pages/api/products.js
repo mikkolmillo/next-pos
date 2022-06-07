@@ -15,7 +15,7 @@ export default async function userHandler(req, res) {
       return res.status(201).json(newProduct)
 
     default:
-      res.setHeader('Allow', ['GET'])
+      res.setHeader('Allow', ['GET'], ['POST'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }

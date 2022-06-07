@@ -16,6 +16,26 @@ const OrderSummary = () => {
     cartCtx.removeItem(id)
   }
 
+  const submitOrderHandler = async () => {
+    const newOrder = {
+      order: {
+        totalAmount: cartCtx.totalAmount,
+        items: [...cartCtx.items]
+      }
+    }
+
+    const res = await fetch('/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newOrder)
+    })
+
+    const data = await res.json()
+    console.log(data);
+  }
+
   return (
     <div className="flex h-screen flex-col bg-white shadow-xl">
       <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
@@ -85,12 +105,13 @@ const OrderSummary = () => {
         </div>
         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
         <div className="mt-6">
-          <a
-            href="#"
+          <button
+            type='button'
             className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+            onClick={submitOrderHandler}
           >
             Checkout
-          </a>
+          </button>
         </div>
         {/* <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
           <p>

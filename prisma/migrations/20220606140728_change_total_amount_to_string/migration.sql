@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "orders" ALTER COLUMN "totalAmount" DROP DEFAULT,
+ALTER COLUMN "totalAmount" SET DATA TYPE VARCHAR(100);
