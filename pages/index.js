@@ -24,12 +24,22 @@ export default function Home({ allProducts }) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/products`)
-  const allProducts = await res.json()
+  try {
+    const res = await fetch(`${process.env.BASE_URL}/api/products`)
+    const allProducts = await res.json()
+
+    return {
+      props: {
+        allProducts, // <== here is a solution
+      },
+    };
+  } catch (error) {
+    console.error(error);
+  }
 
   return {
     props: {
-      allProducts, // <== here is a solution
+      allProducts: [],
     },
   };
 }
