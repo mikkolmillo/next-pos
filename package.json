@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "prismaDev": "dotenv -e .env.local prisma migrate dev ",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "lint": "next lint"
   },
   "dependencies": {
