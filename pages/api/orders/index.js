@@ -1,18 +1,23 @@
-import { prisma } from "../../../lib/db"
+// import { prisma } from "../../../lib/db"
+
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient()
 
 export default async function userHandler(req, res) {
   const { method, body } = req
 
   switch (method) {
     case "POST":
-      const order = await addOrder(body.order)
+      const user = await createGuestUser()
+      const order = await addOrder(body.order, user.id)
       const success = await updateProductQty(body.order)
 
-      if (order && success) {
+      if (user && order && success) {
         return res.status(201).json(order)
       } else {
         return res.status(500).json({ status: "fail", message: "Server Error" })
       }
+
 
     case 'GET':
       const allOrders = await getOrders()
@@ -22,6 +27,20 @@ export default async function userHandler(req, res) {
     default:
       res.setHeader('Allow', ['POST'], ['GET'])
       res.status(405).end(`Method ${method} Not Allowed`)
+  }
+}
+
+const createGuestUser = async () => {
+  try {
+    const user = await prisma.users.create({
+      data: {
+        type: 'GUEST'
+      }
+    })
+
+    return user
+  } catch (error) {
+    console.error(error);
   }
 }
 
@@ -70,11 +89,16 @@ const updateProductQty = async (newOrder) => {
   }
 }
 
-const addOrder = async (newOrder) => {
+const addOrder = async (newOrder, user) => {
   try {
     const order = await prisma.orders.create({
       data: {
         totalAmount: newOrder.totalAmount.toLocaleString('en-AU'),
+        users: {
+          connect: {
+            id: user
+          }
+        },
         products: {
           create: newOrder.items.map(product => {
             return {

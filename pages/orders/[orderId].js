@@ -34,7 +34,7 @@ const OrderPage = ({ order }) => {
       <div className="px-4 py-5 sm:p-6 lg:m-14 m-0">
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6 text-center">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">Order Detail</h3>
+            <h3 className="text-lg leading-6 font-medium text-gray-900">Order {order.usersId}</h3>
             <p className="mt-1 text-nd text-gray-500 mb-2">Order # <span className='font-bold'>{order.id}</span></p>
             <div className="mt-4 sm:mt-0 sm:flex-none">
               <button

@@ -47,6 +47,8 @@ model orders {
   totalAmount String            @db.VarChar(100)
   orderedAt   DateTime          @default(now())
   products    products_orders[]
+  users       users?            @relation(fields: [usersId], references: [id])
+  usersId     String?           @db.Uuid
 }
 
 model save_work {
@@ -58,8 +60,9 @@ model save_work {
 }
 
 model users {
-  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email    String
-  password String
-  type     String
+  id       String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email    String?
+  password String?
+  type     String   @default("GUEST")
+  orders   orders[]
 }

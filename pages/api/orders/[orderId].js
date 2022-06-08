@@ -26,8 +26,10 @@ const getOrders = async (orderId) => {
             product_t: true
           }
         }
-      }
+      },
     })
+
+    console.log(order);
 
     return order
   } catch (error) {

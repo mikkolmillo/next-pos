@@ -46,6 +46,7 @@ const OrderSummary = () => {
       })
 
       const data = await res.json()
+      console.log(data);
 
       setCheckoutSubmit(false)
 
