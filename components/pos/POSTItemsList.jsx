@@ -37,8 +37,7 @@ const POSTItemsList = ({ allProducts }) => {
   // ? ~~~~~~~~~~~~ END
 
   return (
-    <div className="relative pt-16 pb-32 overflow-hidden">
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100" />
+    <div className="relative lg:pt-10 pb-32 overflow-hidden m-10">
       <div className="relative">
         <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
           {/* Table */}
@@ -120,8 +119,8 @@ const POSTItemsList = ({ allProducts }) => {
                 </div>
               </div>
               {/* Buttons */}
-              {/* <div className="m-2 border-2">
-                <div className='flex'>
+              <div className="mt-2">
+                {/* <div className='flex'>
                   <button
                     type="button"
                     className="w-full inline-flex items-center p-3 m-2 m justify-center border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -162,8 +161,8 @@ const POSTItemsList = ({ allProducts }) => {
                   >
                     Products
                   </button>
-                </div>
-              </div> */}
+                </div> */}
+              </div>
 
               <div className="m-2 p-2 flex">
                 <div className="flex-col justify-center items-center w-1/2 sm:w-full">
