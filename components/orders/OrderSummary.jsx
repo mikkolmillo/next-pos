@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from "next/router";
 import {
   ChevronLeftIcon,
@@ -10,6 +10,14 @@ const OrderSummary = () => {
   const cartCtx = useContext(CartContext)
   const router = useRouter()
   const [checkoutSubmit, setCheckoutSubmit] = useState(false)
+  const [cart, setCart] = useState(cartCtx)
+
+  useEffect(() => {
+    const cart = localStorage.getItem('cartItems') ?
+      JSON.parse(localStorage.getItem('cartItems')) :
+      { items: [], totalAmount: 0 }
+    setCart(cart)
+  }, [cartCtx])
 
   const cartItemAddHandler = item => {
     cartCtx.addItem({ ...item, amount: 1 })
@@ -38,13 +46,21 @@ const OrderSummary = () => {
       })
 
       const data = await res.json()
+
       setCheckoutSubmit(false)
+
       if (data) {
         router.push({
           pathname: '/orders/[orderId]',
           query: { orderId: data.id }
         })
       }
+
+      const cartLocalStorage = localStorage.setItem('cartItems',
+        JSON.stringify({ items: [], totalAmount: 0 })
+      )
+
+      setCart(cartLocalStorage)
     } catch (error) {
       console.error(error);
     }
@@ -60,7 +76,7 @@ const OrderSummary = () => {
         <div className="mt-8">
           <div className="flow-root">
             <ul role="list" className="-my-6 divide-y divide-gray-200">
-              {cartCtx.items.map((product) => (
+              {cart && cart.items.map((product) => (
                 <li key={product.id} className="flex py-6">
                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                     <img

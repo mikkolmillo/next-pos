@@ -14,7 +14,6 @@ const Item = ({id, name, price}) => {
     }
 
     cartCtx.addItem(newItem)
-    console.log(cartCtx.items);
   }
 
   return (

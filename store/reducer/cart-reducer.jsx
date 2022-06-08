@@ -23,6 +23,13 @@ const cartReducer = (state, action) => {
         updatedItems = state.items.concat(action.item)
       }
 
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('cartItems', JSON.stringify({
+          items: updatedItems,
+          totalAmount: updatedTotalAmount
+        }))
+      }
+
       return {
         items: updatedItems,
         totalAmount: updatedTotalAmount
@@ -40,6 +47,13 @@ const cartReducer = (state, action) => {
         const updatedItem_2 = { ...existingCartItem_2, amount: existingCartItem_2.amount - 1 }
         updatedItems_2 = [...state.items]
         updatedItems_2[existingCartItemIndex_2] = updatedItem_2
+      }
+
+      if (typeof windows !== 'undefined') {
+        localStorage.setItem('cartItems', JSON.stringify({
+          items: updatedItems_2,
+          totalAmount: updatedTotalAmount_2
+        }))
       }
 
       return {
