@@ -32,8 +32,8 @@ const OrderSummary = () => {
     try {
       const newOrder = {
         order: {
-          totalAmount: cartCtx.totalAmount,
-          items: [...cartCtx.items]
+          totalAmount: cart.totalAmount,
+          items: [...cart.items]
         }
       }
 
