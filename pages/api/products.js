@@ -7,7 +7,6 @@ export default async function userHandler(req, res) {
     case "GET":
       const products = await getProducts()
 
-      console.log(process.env.DATABASE_URL);
       return res.status(200).json(products)
 
     case "POST":

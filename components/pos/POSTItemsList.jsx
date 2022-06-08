@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useContext, useState, useEffect } from 'react'
+import { useContext } from 'react'
 import {
   XCircleIcon,
   UserCircleIcon,
@@ -13,14 +13,13 @@ import CartContext from '../../store/context/cart-context'
 
 const POSTItemsList = ({ allProducts }) => {
   const cartCtx = useContext(CartContext)
-  const [cart, setCart] = useState(cartCtx)
 
-  useEffect(() => {
-    const cart = localStorage.getItem('cartItems') ?
-      JSON.parse(localStorage.getItem('cartItems')) :
-      { items: [], totalAmount: 0 }
-    setCart(cart)
-  }, [cartCtx])
+  // useEffect(() => {
+  //   const cart = localStorage.getItem('cartItems') ?
+  //     JSON.parse(localStorage.getItem('cartItems')) :
+  //     { items: [], totalAmount: 0 }
+  //   setCart(cart)
+  // }, [cartCtx])
 
   const numOfCartItems = cartCtx.items.reduce((currNum, item) => {
     return currNum + item.amount
@@ -79,7 +78,7 @@ const POSTItemsList = ({ allProducts }) => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {cart && cart.items.map((item) => (
+                      {cartCtx && cartCtx.items && cartCtx.items.map((item) => (
                         <tr key={item.id}>
                           <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
                             {item.name}

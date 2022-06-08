@@ -61,7 +61,6 @@ const updateProductQty = async (newOrder) => {
       })
 
       success = true
-      console.log(success);
     }
 
     return success

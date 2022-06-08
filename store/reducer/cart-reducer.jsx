@@ -49,7 +49,7 @@ const cartReducer = (state, action) => {
         updatedItems_2[existingCartItemIndex_2] = updatedItem_2
       }
 
-      if (typeof windows !== 'undefined') {
+      if (typeof window !== 'undefined') {
         localStorage.setItem('cartItems', JSON.stringify({
           items: updatedItems_2,
           totalAmount: updatedTotalAmount_2
