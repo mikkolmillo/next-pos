@@ -66,8 +66,9 @@ const OrderSummary = () => {
   return (
     <div className="flex h-screen flex-col bg-white shadow-xl">
       <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
-        <div className="flex items-start justify-between">
-          <h1 className='text-center text-2xl'>Shopping cart</h1>
+        <div className="">
+          <h1 className='text-left text-2xl'>Shopping cart</h1>
+          <p className="mt-0.5 text-sm text-gray-500">{router.query.uuid}</p>
         </div>
 
         <div className="mt-8">

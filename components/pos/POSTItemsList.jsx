@@ -48,7 +48,7 @@ const POSTItemsList = ({ allProducts }) => {
               <div>
                 <div className="sm:flex sm:items-center">
                   <div className="sm:flex-auto">
-                    <h1 className="text-xl font-semibold text-gray-900">Invoice {router.query.uuid}</h1>
+                    <h1 className="text-xl font-semibold text-gray-900">Invoice for {router.query.uuid}</h1>
                     <span className='text-xl font-bold text-gray-900'># of Items: {numOfCartItems}</span>
                   </div>
                 </div>
@@ -178,7 +178,7 @@ const POSTItemsList = ({ allProducts }) => {
                   </div> */}
 
                   <button className='w-full flex-col justify-center items-center pt-10'>
-                    <Link className='inline-block text-2xl font-semibold' href={'/checkout'}>
+                    <Link className='inline-block text-2xl font-semibold' href={`/checkout/?uuid=${router.query.uuid}`}>
                       <a>
                         <ArrowCircleRightIcon className='h-20 w-20' />
                         Payment
