@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
-  const { cart, totalAmount } = props
+  const { cart, totalAmount, user } = props
   return (
     <div ref={ref} className="px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col">
@@ -12,7 +12,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                 scope="col"
                 className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"
               >
-                {/* ID */}
+                User
               </th>
               <th
                 scope="col"
@@ -30,7 +30,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                 scope="col"
                 className="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0"
               >
-                {/* Quantity */}
+                {user}
               </th>
             </tr>
           </thead>

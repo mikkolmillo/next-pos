@@ -27,6 +27,7 @@ const OrderPage = ({ order }) => {
       <div className="hidden">
         <ComponentToPrint
           cart={formattedOrder.products}
+          user={formattedOrder.id}
           totalAmount={formattedOrder.totalAmount}
           ref={componentRef}
         />
