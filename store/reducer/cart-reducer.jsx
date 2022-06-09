@@ -5,6 +5,11 @@ export const defaultCartState = {
 
 const cartReducer = (state, action) => {
   switch (action.type) {
+    case 'CART':
+      return {
+        items: action.cart.items,
+        totalAmount: action.cart.totalAmount
+      }
     case 'ADD':
       const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount
       const existingCartItemIndex = state.items.findIndex(item => item.id === action.item.id)

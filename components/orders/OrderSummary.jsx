@@ -10,14 +10,13 @@ const OrderSummary = () => {
   const cartCtx = useContext(CartContext)
   const router = useRouter()
   const [checkoutSubmit, setCheckoutSubmit] = useState(false)
-  const [cart, setCart] = useState(cartCtx)
 
   useEffect(() => {
-    const cart = localStorage.getItem('cartItems') ?
-      JSON.parse(localStorage.getItem('cartItems')) :
-      { items: [], totalAmount: 0 }
-    setCart(cart)
-  }, [cartCtx])
+    const cart = JSON.parse(localStorage.getItem('cartItems'))
+    if (cart) {
+      cartCtx.initializeCart(cart)
+    }
+  }, [])
 
   const cartItemAddHandler = item => {
     cartCtx.addItem({ ...item, amount: 1 })
@@ -32,8 +31,8 @@ const OrderSummary = () => {
     try {
       const newOrder = {
         order: {
-          totalAmount: cart.totalAmount,
-          items: [...cart.items]
+          totalAmount: cartCtx.totalAmount,
+          items: [...cartCtx.items]
         }
       }
 
@@ -46,7 +45,6 @@ const OrderSummary = () => {
       })
 
       const data = await res.json()
-      console.log(data);
 
       setCheckoutSubmit(false)
 
@@ -60,8 +58,6 @@ const OrderSummary = () => {
       const cartLocalStorage = localStorage.setItem('cartItems',
         JSON.stringify({ items: [], totalAmount: 0 })
       )
-
-      setCart(cartLocalStorage)
     } catch (error) {
       console.error(error);
     }
@@ -77,7 +73,7 @@ const OrderSummary = () => {
         <div className="mt-8">
           <div className="flow-root">
             <ul role="list" className="-my-6 divide-y divide-gray-200">
-              {cart && cart.items.map((product) => (
+              {cartCtx && cartCtx.items.map((product) => (
                 <li key={product.id} className="flex py-6">
                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                     <img

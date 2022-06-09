@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import {
   XCircleIcon,
   UserCircleIcon,
@@ -14,14 +14,14 @@ import CartContext from '../../store/context/cart-context'
 const POSTItemsList = ({ allProducts }) => {
   const cartCtx = useContext(CartContext)
 
-  // useEffect(() => {
-  //   const cart = localStorage.getItem('cartItems') ?
-  //     JSON.parse(localStorage.getItem('cartItems')) :
-  //     { items: [], totalAmount: 0 }
-  //   setCart(cart)
-  // }, [cartCtx])
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem('cartItems'))
+    if (cart) {
+      cartCtx.initializeCart(cart)
+    }
+  }, [])
 
-  const numOfCartItems = cartCtx.items.reduce((currNum, item) => {
+  const numOfCartItems = cartCtx.items && cartCtx.items.reduce((currNum, item) => {
     return currNum + item.amount
   }, 0)
 

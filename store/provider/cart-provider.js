@@ -1,47 +1,30 @@
 import { useReducer, useState, useEffect } from "react"
+// import { useLocalStorage } from "../../hookes/useLocalStorage"
 import CartContext from "../context/cart-context"
 import cartReducer, { defaultCartState } from "../reducer/cart-reducer"
 
-// let defaultCartState = {
-//   items: [],
-//   totalAmount: 0,
-// }
-
-// if (typeof window !== 'undefined') {
-//   defaultCartState = JSON.parse(localStorage.getItem('cartItems'))
-// }
-
 const CartProvider = (props) => {
-  // const [cart, setCart] = useState(defaultCartState);
+  // const [id, set_id] = useLocalStorage("cartItems", defaultCartState);
   const [cartState, dispatch] = useReducer(cartReducer, defaultCartState)
-  console.log(cartState);
-  // useEffect(() => {
-  //   const cartData = JSON.parse(localStorage.getItem("cartItems"));
-  //   if (cartData) {
-  //     setCart(cartData);
-  //   }
-  // }, [])
 
-  // useEffect(() => {
-  //   if (cart !== defaultCartState) {
-  //     localStorage.setItem("cartItems", JSON.stringify(cart));
-  //   }
-  // }, [cart])
-  
+  const cartItemsHandler = cart => {
+    dispatch({ type: 'CART', cart })
+  }
 
   const addItemToCartHandler = item => {
     dispatch({ type: 'ADD', item })
   }
 
-  const removeItemToCartProvider = id => {
+  const removeItemToCartHandler = id => {
     dispatch({ type: 'REMOVE', id })
   }
 
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
+    initializeCart: cartItemsHandler,
     addItem: addItemToCartHandler,
-    removeItem: removeItemToCartProvider
+    removeItem: removeItemToCartHandler
   }
 
   return (

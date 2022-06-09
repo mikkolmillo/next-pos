@@ -29,8 +29,6 @@ const getOrders = async (orderId) => {
       },
     })
 
-    console.log(order);
-
     return order
   } catch (error) {
     console.error(error);
