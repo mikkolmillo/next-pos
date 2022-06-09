@@ -30,6 +30,7 @@ const OrderSummary = () => {
     setCheckoutSubmit(true)
     try {
       const newOrder = {
+        user: router.query.uuid,
         order: {
           totalAmount: cartCtx.totalAmount,
           items: [...cartCtx.items]
@@ -55,7 +56,7 @@ const OrderSummary = () => {
         })
       }
 
-      const cartLocalStorage = localStorage.setItem('cartItems',
+      localStorage.setItem('cartItems',
         JSON.stringify({ items: [], totalAmount: 0 })
       )
     } catch (error) {

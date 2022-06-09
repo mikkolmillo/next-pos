@@ -8,7 +8,7 @@ export default async function userHandler(req, res) {
 
   switch (method) {
     case "POST":
-      const user = await createGuestUser()
+      const user = await createGuestUser(body.user)
       const order = await addOrder(body.order, user.id)
       const success = await updateProductQty(body.order)
 
@@ -30,10 +30,11 @@ export default async function userHandler(req, res) {
   }
 }
 
-const createGuestUser = async () => {
+const createGuestUser = async (userId) => {
   try {
     const user = await prisma.users.create({
       data: {
+        id: userId,
         type: 'GUEST'
       }
     })
