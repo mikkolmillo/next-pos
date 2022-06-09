@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 import {
   XCircleIcon,
@@ -12,6 +13,7 @@ import ItemList from '../HomeItems/ItemList'
 import CartContext from '../../store/context/cart-context'
 
 const POSTItemsList = ({ allProducts }) => {
+  const router = useRouter()
   const cartCtx = useContext(CartContext)
 
   useEffect(() => {
@@ -46,7 +48,7 @@ const POSTItemsList = ({ allProducts }) => {
               <div>
                 <div className="sm:flex sm:items-center">
                   <div className="sm:flex-auto">
-                    <h1 className="text-xl font-semibold text-gray-900">Invoice</h1>
+                    <h1 className="text-xl font-semibold text-gray-900">Invoice {router.query.uuid}</h1>
                     <span className='text-xl font-bold text-gray-900'># of Items: {numOfCartItems}</span>
                   </div>
                 </div>
