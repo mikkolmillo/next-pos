@@ -1,6 +1,8 @@
+# ~~~~~~~~~~~~~~~~~ Orders ~~~~~~~~~~~~~~~~~
 ###
-GET http://localhost:3000/api/orders/24
+GET http://localhost:3000/api/orders/
 
+# Create Order
 ###
 POST http://localhost:3000/api/orders
 Content-Type: application/json
@@ -17,10 +19,11 @@ Content-Type: application/json
   }
 }
 
-# Products
+# ~~~~~~~~~~~~~~~~~ Products ~~~~~~~~~~~~~~~~~
 ###
-GET http://localhost:3000/api/products
+GET https://next-pos-sable.vercel.app/api/products
 
+# Create Products
 ###
 POST http://localhost:3000/api/products
 Content-Type: application/json
@@ -33,10 +36,10 @@ Content-Type: application/json
   }
 }
 
-# Users
+# ~~~~~~~~~~~~~~~~~ Users ~~~~~~~~~~~~~~~~~
 ###
-# GET http://localhost:3000/api/products
+GET https://next-pos-sable.vercel.app/api/users
 
+# Specific User
 ###
-POST http://localhost:3000/api/orders
-Content-Type: application/json
+GET https://next-pos-sable.vercel.app/users/48250be6-e0b3-4337-9298-c2b95489e695

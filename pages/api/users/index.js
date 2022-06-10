@@ -4,35 +4,25 @@ import { prisma } from "../../../lib/db"
 // const prisma = new PrismaClient()
 
 export default async function userHandler(req, res) {
-  const { method, query  } = req
+  const { method } = req
 
   switch (method) {
     case 'GET':
-      const order = await getOrders(query.orderId)
+      const allUsers = await getUsers()
 
-      return res.status(200).json(order)
+      return res.status(200).json(allUsers)
+
     default:
       res.setHeader('Allow', ['GET'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }
 
-const getOrders = async (orderId) => {
+const getUsers = async () => {
   try {
-    const order = await prisma.orders.findFirst({
-      where: {
-        id: Number(orderId)
-      },
-      include: {
-        products: {
-          include: {
-            product_t: true
-          }
-        }
-      },
-    })
+    const allUsers = await prisma.users.findMany({})
 
-    return order
+    return allUsers
   } catch (error) {
     console.error(error);
   }
