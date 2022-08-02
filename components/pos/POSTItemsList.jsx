@@ -121,7 +121,7 @@ const POSTItemsList = ({ allProducts }) => {
               </div>
               {/* Buttons */}
               <div className="mt-2">
-                {/* <div className='flex'>
+                <div className='flex'>
                   <button
                     type="button"
                     className="w-full inline-flex items-center p-3 m-2 m justify-center border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -162,12 +162,12 @@ const POSTItemsList = ({ allProducts }) => {
                   >
                     Products
                   </button>
-                </div> */}
+                </div>
               </div>
 
               <div className="m-2 p-2 flex">
                 <div className="flex-col justify-center items-center w-1/2 sm:w-full">
-                  {/* <div className="flex justify-center">
+                  <div className="flex justify-center">
                     <button
                       type="button"
                       className="inline-flex justify-center w-full p-3 items-center border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -175,7 +175,7 @@ const POSTItemsList = ({ allProducts }) => {
                       <UserCircleIcon className="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true" />
                       Customer
                     </button>
-                  </div> */}
+                  </div>
 
                   <button className='w-full flex-col justify-center items-center pt-10'>
                     <Link className='inline-block text-2xl font-semibold' href={`/checkout/?uuid=${router.query.uuid}`}>
@@ -187,7 +187,7 @@ const POSTItemsList = ({ allProducts }) => {
                   </button>
                 </div>
 
-                {/* <div className="w-1/2 sm:w-full">
+                <div className="w-1/2 sm:w-full">
                   <div className='flex-col justify-center'>
                     <div className='flex justify-center items-center'>
                       <button className='p-2 text-xl mx-1 border-2'>1</button>
@@ -216,7 +216,7 @@ const POSTItemsList = ({ allProducts }) => {
                       </button>
                     </div>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
